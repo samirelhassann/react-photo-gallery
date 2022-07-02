@@ -1,38 +1,52 @@
 import { useState, useEffect } from "react";
-import Loading from "../assets/Loading";
 import { PexelsPhoto } from "../services/Pexels/PexelsResponse";
 
 import PhotoCard from "../components/PhotoCard";
 import { PexelsService } from "../services/Pexels/PexelsService";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+const style = {
+  height: 30,
+  border: "1px solid green",
+  margin: 6,
+  padding: 8,
+};
 
 const TopRating = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [pagesExecuted, setPagesExecuted] = useState<number[]>([]);
   const [photos, setPhotos] = useState<PexelsPhoto[]>([]);
 
   useEffect(() => {
-    // const actualPhotos = 
-    PexelsService.getCuratedPhotos(1, 50).then((result) => {
-      setPhotos(result.photos);
-      setIsLoading(false);
-    });
+    callNewItems();
   }, []);
 
-  return (
-    <div className="p-5">
-      {isLoading && (
-        <div className="align-center justify-center flex">
-          <Loading /> 
-        </div>
-      )}
+  const callNewItems = () => {
+    PexelsService.getCuratedPhotos(page, 50).then((result) => {
+      setPhotos([...photos].concat(result.photos));
+      setPagesExecuted([...pagesExecuted, page]);
 
-      {!isLoading && (
-        <div className="flex-wrap flex align-center justify-center">
-          {photos.map((p) => (
-            <PhotoCard imageSrc={p.src.landscape} alt={p.photographer} />
-          ))}
+      setPage(page + 1);
+    });
+  };
+
+  return (
+    <InfiniteScroll
+      dataLength={photos.length}
+      next={callNewItems}
+      hasMore={true}
+      loader={
+        <div className="py-5 flex-wrap flex align-center justify-center">
+          <h4>Loading...</h4>
         </div>
-      )}
-    </div>
+      }
+    >
+      <div className="flex-wrap flex align-center justify-center">
+        {photos.map((p) => (
+          <PhotoCard imageSrc={p.src.landscape} alt={p.photographer} />
+        ))}
+      </div>
+    </InfiniteScroll>
   );
 };
 
