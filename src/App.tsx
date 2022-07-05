@@ -1,12 +1,12 @@
 import "./App.css";
 import Header from "./components/Header";
-import TopRating from "./pages/TopRating";
+import Routes from "./routes/MainRoutes";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <TopRating />
+      <Routes />
     </div>
   );
 }

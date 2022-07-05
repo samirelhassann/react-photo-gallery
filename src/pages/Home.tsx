@@ -5,14 +5,7 @@ import PhotoCard from "../components/PhotoCard";
 import { PexelsService } from "../services/Pexels/PexelsService";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const style = {
-  height: 30,
-  border: "1px solid green",
-  margin: 6,
-  padding: 8,
-};
-
-const TopRating = () => {
+const Home = () => {
   const [page, setPage] = useState(1);
   const [pagesExecuted, setPagesExecuted] = useState<number[]>([]);
   const [photos, setPhotos] = useState<PexelsPhoto[]>([]);
@@ -43,11 +36,15 @@ const TopRating = () => {
     >
       <div className="flex-wrap flex align-center justify-center">
         {photos.map((p) => (
-          <PhotoCard imageSrc={p.src.landscape} alt={p.photographer} />
+          <PhotoCard
+            id={p.id}
+            imageSrc={p.src.landscape}
+            alt={p.photographer}
+          />
         ))}
       </div>
     </InfiniteScroll>
   );
 };
 
-export default TopRating;
+export default Home;

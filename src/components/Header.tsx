@@ -2,10 +2,7 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
-const navigation = [
-  { name: "Top Rating", href: "#", current: true },
-  { name: "Collections", href: "#", current: false },
-];
+const navigation = [{ name: "All Photos", href: "#", current: true }];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

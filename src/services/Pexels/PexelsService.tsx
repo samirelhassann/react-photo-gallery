@@ -1,9 +1,9 @@
 import axios from "axios";
 import axiosRetry from "axios-retry";
-import { PexelsResponse } from "./PexelsResponse";
+import { PexelsPhoto, PexelsResponse } from "./PexelsResponse";
 
 const BASE_URL = "https://api.pexels.com";
-const AUTH = "563492ad6f91700001000001885f4e887e9a47398b519d6dea7827d7";
+const AUTH = "563492ad6f91700001000001769d695fad8b4cddb8a086879458854b";
 
 axiosRetry(axios, {
   retries: 3,
@@ -28,6 +28,18 @@ export const PexelsService = {
           headers: { Authorization: AUTH },
         }
       )
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw error;
+      });
+  },
+  getPhoto: (id: number = 1) => {
+    return axios
+      .get<PexelsPhoto>(`${BASE_URL}/v1/photos/${id}`, {
+        headers: { Authorization: AUTH },
+      })
       .then((response) => {
         return response.data;
       })
