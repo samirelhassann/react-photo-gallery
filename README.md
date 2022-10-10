@@ -1,4 +1,4 @@
-# Memory Game
+# Photo Gallery
 
 Photo Gallery built in Typescript + React, using:
 - tailwindcss
