@@ -1,6 +1,7 @@
 {
   "name": "react-photo-gallery",
   "version": "0.1.0",
+  "homepage": "https://samirelhassann.github.io/react-photo-gallery",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.6.5",
@@ -24,8 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node setHomepage.js '' && REACT_APP_BASENAME='' react-scripts start",
+    "build": "node setHomepage.js 'https://samirelhassann.github.io/react-photo-gallery' && REACT_APP_BASENAME='/react-photo-gallery' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

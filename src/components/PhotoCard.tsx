@@ -8,10 +8,12 @@ interface Props {
 }
 
 const Component = ({ id, imageSrc, alt }: Props) => {
+  const basePath = process.env.REACT_APP_BASENAME || '';
+
   return (
-    <Link to={`/photos?id=${id}`}>
+    <Link to={`${basePath}/photos?id=${id}`}>
       <button>
-        <div className="m-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-72">
+        <div className="max-w-sm m-2 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 w-72">
           <img className="rounded" src={imageSrc} alt={alt} />
         </div>
       </button>

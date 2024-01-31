@@ -3,9 +3,11 @@ import AboutPhoto from "../pages/AboutPhoto";
 import Home from "../pages/Home";
 
 const MainRoutes = () => {
+  const basePath = process.env.REACT_APP_BASENAME || '';
+
   return useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "/photos", element: <AboutPhoto /> },
+    { path: basePath, element: <Home /> },
+    { path: `${basePath}/photos`, element: <AboutPhoto /> },
   ]);
 };
 
